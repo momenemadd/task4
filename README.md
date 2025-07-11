@@ -1,1 +1,999 @@
-# task4
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="An advanced blog with modern features and responsive design" />
+    <title>My Advanced Blog</title>
+    
+   <style>
+
+:root {
+
+  --primary-color: #007bff;
+  --primary-dark: #0056b3;
+  --secondary-color: #6c757d;
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+  
+  --bg-primary: #ffffff;
+  --bg-secondary: #f4f4f9;
+  --bg-dark: #343a40;
+  
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --text-light: #ffffff;
+  --text-muted: #6c757d;
+  
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-xxl: 3rem;
+  
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.5rem;
+  --border-radius-lg: 1rem;
+  
+  --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --shadow-md: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+  
+  --transition-fast: 0.15s ease-in-out;
+  --transition-normal: 0.3s ease-in-out;
+  --transition-slow: 0.5s ease-in-out;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: var(--spacing-md);
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: var(--text-light);
+}
+
+h2 {
+  font-size: 1.8rem;
+  color: var(--text-primary);
+}
+
+h3 {
+  font-size: 1.4rem;
+  color: var(--text-primary);
+}
+
+
+.header {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  color: var(--text-light);
+  padding: var(--spacing-xl) 0;
+  text-align: center;
+  position: relative;
+  box-shadow: var(--shadow-md);
+}
+
+.header::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background-color: var(--text-light);
+  border-radius: 2px;
+}
+
+.navbar {
+  margin-top: var(--spacing-lg);
+}
+
+.navbar-nav {
+  gap: var(--spacing-md);
+}
+
+.nav-link {
+  color: var(--text-light) !important;
+  font-weight: 500;
+  transition: var(--transition-fast);
+  position: relative;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--warning-color) !important;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--warning-color);
+  transition: var(--transition-fast);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+main {
+  min-height: 70vh;
+}
+
+.post {
+  background-color: var(--bg-primary);
+  border: 1px solid #e9ecef;
+  border-radius: var(--border-radius-lg);
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.post::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--primary-color), var(--primary-dark));
+  transition: var(--transition-normal);
+}
+
+.post:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.post:hover::before {
+  width: 8px;
+}
+
+.post h2 {
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.post p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: var(--spacing-lg);
+}
+
+.post .btn-primary {
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  transition: var(--transition-fast);
+}
+
+.post .btn-primary:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.sidebar {
+  background-color: var(--bg-primary);
+  padding: var(--spacing-xl);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--spacing-xl);
+  border: 1px solid #e9ecef;
+}
+
+.sidebar h3 {
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-lg);
+  font-size: 1.3rem;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: var(--spacing-sm);
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.sidebar ul li:last-child {
+  border-bottom: none;
+}
+
+.sidebar ul li a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: var(--transition-fast);
+  display: block;
+  padding: var(--spacing-xs) 0;
+}
+
+.sidebar ul li a:hover {
+  color: var(--primary-dark);
+  padding-left: var(--spacing-sm);
+}
+
+.footer {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  padding: var(--spacing-xxl) 0 var(--spacing-lg) 0;
+  margin-top: var(--spacing-xxl);
+}
+
+.footer h3 {
+  color: var(--text-light);
+  margin-bottom: var(--spacing-lg);
+}
+
+.footer p {
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.contact-form {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: var(--spacing-xl);
+  border-radius: var(--border-radius-lg);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.contact-form h3 {
+  color: var(--text-light);
+  margin-bottom: var(--spacing-lg);
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: var(--spacing-lg);
+}
+
+.form-control {
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  transition: var(--transition-fast);
+  font-size: 1rem;
+  width: 100%;
+  min-height: 48px;
+}
+
+.form-control:focus {
+  background-color: var(--bg-primary);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.3rem rgba(0, 123, 255, 0.25);
+  outline: none;
+  transform: translateY(-2px);
+}
+
+.form-control::placeholder {
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+.form-label {
+  color: var(--text-light);
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  display: block;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-send-message {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  color: var(--text-light);
+  border: none;
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 160px;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-send-message::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left var(--transition-slow);
+}
+
+.btn-send-message:hover {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  color: var(--text-light);
+}
+
+.btn-send-message:hover::before {
+  left: 100%;
+}
+
+.btn-send-message:active {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-send-message:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.3rem rgba(0, 123, 255, 0.5);
+}
+
+.btn-send-message:disabled {
+  background: var(--secondary-color);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.form-control.is-valid {
+  border-color: var(--success-color);
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+.form-control.is-invalid {
+  border-color: var(--danger-color);
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.alert {
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  margin-top: var(--spacing-md);
+  border: none;
+  font-weight: 500;
+}
+
+.alert-success {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: #155724;
+  border-left: 4px solid var(--success-color);
+}
+
+.alert-danger {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #721c24;
+  border-left: 4px solid var(--danger-color);
+}
+
+textarea.form-control {
+  min-height: 120px;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.6;
+}
+
+.contact-form .row {
+  margin-bottom: var(--spacing-lg);
+}
+
+.contact-form .col-lg-6 {
+  padding: 0 var(--spacing-sm);
+}
+
+
+@media (max-width: 768px) {
+  .contact-form {
+    padding: var(--spacing-lg);
+  }
+  
+  .form-control {
+    padding: var(--spacing-sm) var(--spacing-md);
+    min-height: 44px;
+  }
+  
+  .btn-send-message {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-lg);
+  }
+  
+  .contact-form h3 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .contact-form {
+    padding: var(--spacing-md);
+  }
+  
+  .form-group {
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .form-control {
+    padding: var(--spacing-sm);
+    font-size: 0.95rem;
+  }
+  
+  .form-label {
+    font-size: 0.9rem;
+  }
+}
+
+.social-links {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  border-radius: 50%;
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.social-links a:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.social-links i {
+  font-size: 1.2rem;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
+  text-align: center;
+}
+
+.footer-bottom p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-fast);
+  z-index: 1000;
+}
+
+.back-to-top:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.back-to-top.show {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.2rem;
+  }
+  
+  .header {
+    padding: var(--spacing-lg) 0;
+  }
+  
+  .post {
+    padding: var(--spacing-lg);
+  }
+  
+  .sidebar {
+    padding: var(--spacing-lg);
+  }
+  
+  .footer {
+    padding: var(--spacing-xl) 0 var(--spacing-lg) 0;
+  }
+  
+  .back-to-top {
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+  }
+  
+  .post {
+    padding: var(--spacing-md);
+  }
+  
+  .sidebar {
+    padding: var(--spacing-md);
+  }
+  
+  .contact-form {
+    padding: var(--spacing-md);
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+.btn:focus,
+.form-control:focus,
+.nav-link:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+
+@media (prefers-contrast: high) {
+  :root {
+    --primary-color: #000080;
+    --text-primary: #000000;
+    --bg-primary: #ffffff;
+  }
+}  </style>
+  </head>
+  <body>
+     <header class="header">
+      <div class="container">
+        <h1>My Advanced Blog</h1>
+        
+        
+        <nav class="navbar navbar-expand-lg navbar-dark">
+          <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#home">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#contact">Contact</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#portfolio">Portfolio</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+   
+    <main class="container mt-5">
+      <div class="row">
+        
+        <section class="col-lg-8">
+          <article class="post">
+            <h2>First Advanced Article Title</h2>
+            <p>
+              This is some sample text for the first article. The full content
+              of the article could be displayed here. Feel free to add more
+              content and style it as needed.
+            </p>
+            <button class="btn btn-primary">Read More</button>
+          </article>
+          
+          <article class="post">
+            <h2>Second Advanced Article Title</h2>
+            <p>
+              This is some sample text for the second article. The full content
+              of the article could be displayed here. Experiment with different
+              layouts and design enhancements.
+            </p>
+            <button class="btn btn-primary">Read More</button>
+          </article>
+          
+          <article class="post">
+            <h2>Third Advanced Article Title</h2>
+            <p>
+              This is some sample text for the third article. Challenge yourself
+              to add more features and make the blog more interactive and
+              user-friendly.
+            </p>
+            <button class="btn btn-primary">Read More</button>
+          </article>
+        </section>
+        
+       
+        <aside class="col-lg-4">
+          <div class="sidebar">
+            <h3>About the Blog</h3>
+            <p>
+              This blog is more advanced, requiring enhancements and
+              restructuring. Consider adding more sections and making it dynamic
+              with JavaScript.
+            </p>
+            
+            <h3>Useful Links</h3>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About the Author</a></li>
+              <li><a href="#contact">Contact Us</a></li>
+              <li><a href="#portfolio">Portfolio</a></li>
+            </ul>
+          </div>
+          
+          <div class="sidebar">
+            <h3>Recent Posts</h3>
+            <ul>
+              <li><a href="#post1">How to Improve Your Blog</a></li>
+              <li><a href="#post2">Understanding CSS Grid</a></li>
+              <li><a href="#post3">10 JavaScript Tips and Tricks</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          
+          <div class="col-lg-6">
+            <h3>Contact Us</h3>
+            <form class="contact-form" id="contactForm">
+              <div class="form-group">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name" required>
+              </div>
+              <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address" required>
+              </div>
+              <div class="form-group">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" name="message" rows="4" placeholder="Type your message here..." required></textarea>
+              </div>
+              <button type="submit" class="btn-send-message">Send Message</button>
+            </form>
+          </div>
+          
+          
+          <div class="col-lg-6">
+            <h3>About Us</h3>
+            <p>This is an advanced blog showcasing modern web development techniques and best practices.</p>
+            <div class="social-links">
+              <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+              <a href="#" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2024 My Advanced Blog. All Rights Reserved | Designed by Mo'men</p>
+        </div>
+      </div>
+    </footer>
+
+   
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+      <i class="bi bi-arrow-up"></i>
+    </button>
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    
+    <script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    'use strict';
+    
+    
+    initBackToTop();
+    initContactForm();
+    initSmoothScrolling();
+    initNavigationHighlight();
+    
+    
+    function initBackToTop() {
+        const backToTopButton = document.getElementById('backToTop');
+        
+        if (!backToTopButton) {
+            console.warn('Back to top button not found');
+            return;
+        }
+        
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        
+        backToTopButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            scrollToTop();
+        });
+        
+        
+        function scrollToTop() {
+            const scrollStep = -window.scrollY / (500 / 15);
+            const scrollInterval = setInterval(function() {
+                if (window.scrollY !== 0) {
+                    window.scrollBy(0, scrollStep);
+                } else {
+                    clearInterval(scrollInterval);
+                }
+            }, 15);
+        }
+    }
+    
+   
+    function initContactForm() {
+        const contactForm = document.getElementById('contactForm');
+        
+        if (!contactForm) {
+            console.warn('Contact form not found');
+            return;
+        }
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleFormSubmission();
+        });
+        
+        
+        function handleFormSubmission() {
+            const formData = new FormData(contactForm);
+            const formObject = Object.fromEntries(formData);
+            
+            
+            if (!validateForm(formObject)) {
+                return;
+            }
+            
+           
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
+            
+           
+            setTimeout(function() {
+                showSuccessMessage();
+                contactForm.reset();
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            }, 2000);
+        }
+        
+       
+        function validateForm(data) {
+            const errors = [];
+            
+            if (!data.name || data.name.trim().length < 2) {
+                errors.push('Name must be at least 2 characters long');
+            }
+            
+            if (!data.email || !isValidEmail(data.email)) {
+                errors.push('Please enter a valid email address');
+            }
+            
+            if (!data.message || data.message.trim().length < 10) {
+                errors.push('Message must be at least 10 characters long');
+            }
+            
+            if (errors.length > 0) {
+                showErrorMessage(errors.join(', '));
+                return false;
+            }
+            
+            return true;
+        }
+        
+        
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+        
+       
+        function showSuccessMessage() {
+            const message = document.createElement('div');
+            message.className = 'alert alert-success mt-3';
+            message.textContent = 'Thank you! Your message has been sent successfully.';
+            contactForm.appendChild(message);
+          
+            setTimeout(function() {
+                message.remove();
+            }, 5000);
+        }
+        
+        
+        function showErrorMessage(errorText) {
+            const message = document.createElement('div');
+            message.className = 'alert alert-danger mt-3';
+            message.textContent = errorText;
+            contactForm.appendChild(message);
+            
+            
+            setTimeout(function() {
+                message.remove();
+            }, 5000);
+        }
+    }
+    
+   
+    function initSmoothScrolling() {
+        const navLinks = document.querySelectorAll('a[href^="#"]');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    const headerHeight = document.querySelector('.header').offsetHeight;
+                    const targetPosition = targetElement.offsetTop - headerHeight - 20;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    }
+    
+    
+    function initNavigationHighlight() {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', function() {
+            let current = '';
+            const scrollPosition = window.pageYOffset + 100;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    }
+    
+    
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+    
+   
+    const debouncedScrollHandler = debounce(function() {}, 10);
+    
+    window.addEventListener('scroll', debouncedScrollHandler);
+    
+    
+    console.log('Advanced Blog JavaScript loaded successfully');
+});
+
+
+window.addEventListener('unhandledrejection', function(event) {
+    console.error('Unhandled promise rejection:', event.reason);
+});
+
+
+if ('performance' in window) {
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            const perfData = performance.getEntriesByType('navigation')[0];
+            console.log('Page load time:', perfData.loadEventEnd - perfData.loadEventStart, 'ms');
+        }, 0);
+    });
+} </script>
+  </body>
+</html>
